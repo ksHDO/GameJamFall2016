@@ -42,6 +42,9 @@
     <Compile Include="Components\Entity.cs" />
     <Compile Include="Components\EntityManager.cs" />
     <Compile Include="FileReadWriter.cs" />
+    <Compile Include="GameState\PlayScene.cs" />
+    <Compile Include="GameState\Scene.cs" />
+    <Compile Include="GameState\State.cs" />
     <Compile Include="ShapeGenerator.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />

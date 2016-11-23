@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TentativeTitle.GameState;
 
 namespace TentativeTitle
 {
@@ -11,6 +12,10 @@ namespace TentativeTitle
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        private PlayScene _playScene;
+        private State _state;
+
 
         public Game1()
         {
@@ -27,6 +32,7 @@ namespace TentativeTitle
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            _playScene = new PlayScene();
 
             base.Initialize();
         }
@@ -39,8 +45,8 @@ namespace TentativeTitle
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // TODO: use this.Content to load your game content here
+            _playScene.LoadContent(Content);
         }
 
         /// <summary>
@@ -50,6 +56,7 @@ namespace TentativeTitle
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            _playScene.UnloadContent();
         }
 
         /// <summary>
@@ -63,6 +70,7 @@ namespace TentativeTitle
                 Exit();
 
             // TODO: Add your update logic here
+            _playScene.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -76,6 +84,9 @@ namespace TentativeTitle
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            _playScene.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
