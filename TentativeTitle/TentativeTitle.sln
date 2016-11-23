@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TentativeTitle", "TentativeTitle\TentativeTitle.csproj", "{E589EF2B-6E4D-46A9-9C8E-21B4BC1B821B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditor", "MapEditor\MapEditor.csproj", "{3572CA09-B398-4FF7-AB36-28098F3E52B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +17,10 @@ Global
 		{E589EF2B-6E4D-46A9-9C8E-21B4BC1B821B}.Debug|x86.Build.0 = Debug|x86
 		{E589EF2B-6E4D-46A9-9C8E-21B4BC1B821B}.Release|x86.ActiveCfg = Release|x86
 		{E589EF2B-6E4D-46A9-9C8E-21B4BC1B821B}.Release|x86.Build.0 = Release|x86
+		{3572CA09-B398-4FF7-AB36-28098F3E52B4}.Debug|x86.ActiveCfg = Debug|x86
+		{3572CA09-B398-4FF7-AB36-28098F3E52B4}.Debug|x86.Build.0 = Debug|x86
+		{3572CA09-B398-4FF7-AB36-28098F3E52B4}.Release|x86.ActiveCfg = Release|x86
+		{3572CA09-B398-4FF7-AB36-28098F3E52B4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
