@@ -10,6 +10,8 @@ namespace TentativeTitle.Components
     class GameTime { }
     class Entity
     {
+        private static int _currentID = 0;
+        private int _id;
         protected const int MAX_COMPONENTS = 20;
         protected Component[] _components;
         protected int _componentIndex = 0;
@@ -18,8 +20,14 @@ namespace TentativeTitle.Components
 
         public Entity(string name)
         {
+            _id = _currentID++;
             _components = new Component[MAX_COMPONENTS];
             _name = name;
+        }
+
+        public int GetID()
+        {
+            return _id;
         }
 
         public bool AddComponent(Component component)

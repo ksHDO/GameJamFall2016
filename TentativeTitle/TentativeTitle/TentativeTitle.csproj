@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\Entity.cs" />
+    <Compile Include="Components\EntityManager.cs" />
     <Compile Include="FileReadWriter.cs" />
     <Compile Include="ShapeGenerator.cs" />
     <Compile Include="Game1.cs" />
