@@ -9,24 +9,20 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TentativeTitle
 {
-    class MouseManager : GameState.Scene
+    class MouseManager
     {
         public enum Cursor
         {
             DEFAULT, CROSSHAIR
         }
 
-        public Cursor CurrentCursor { get; set; }
+        public static Cursor CurrentCursor { get; set; } = CurrentCursor = Cursor.DEFAULT;
 
-        private Texture2D _textureDefault;
-        private Texture2D _textureCrosshair;
+        private static Texture2D _textureDefault;
+        private static Texture2D _textureCrosshair;
 
-        public MouseManager()
-        {
-            CurrentCursor = Cursor.DEFAULT;
-        }
 
-        public void Draw(SpriteBatch batch)
+        public static void Draw(SpriteBatch batch)
         {
             Texture2D currentCursor = GetCurrentCursorTexture(CurrentCursor);
             Vector2 mousePos = MouseInput.LastPos;
@@ -34,7 +30,7 @@ namespace TentativeTitle
             batch.Draw(currentCursor, mousePos + cursorOffset, Color.White);
         }
 
-        private Texture2D GetCurrentCursorTexture(Cursor cursor)
+        private static Texture2D GetCurrentCursorTexture(Cursor cursor)
         {
             Texture2D output;
             switch(cursor)
@@ -49,7 +45,7 @@ namespace TentativeTitle
             return output;
         }
 
-        private Vector2 GetCurrentCursorBounds(Cursor cursor, Texture2D texture)
+        private static Vector2 GetCurrentCursorBounds(Cursor cursor, Texture2D texture)
         {
             Vector2 output;
             Rectangle bounds = texture.Bounds;
@@ -65,19 +61,19 @@ namespace TentativeTitle
             return output;
         }
 
-        public void LoadContent(ContentManager content)
+        public static void LoadContent(ContentManager content)
         {
             _textureDefault = content.Load<Texture2D>(@"sprites/cursor/cursorDefault");
             _textureCrosshair = content.Load<Texture2D>(@"sprites/cursor/cursorCrosshair");
         }
 
-        public void UnloadContent()
+        public static void UnloadContent()
         {
             _textureDefault.Dispose();
             _textureCrosshair.Dispose();
         }
 
-        public void Update(GameTime gameTime)
+        public static void Update(GameTime gameTime)
         {
         }
 

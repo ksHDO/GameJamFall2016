@@ -14,7 +14,6 @@ namespace TentativeTitle
         SpriteBatch spriteBatch;
 
         private Scene _sceneCurrent;
-        private MouseManager _mouseManager;
         private State _state;
         public Settings _settings;
 
@@ -37,7 +36,6 @@ namespace TentativeTitle
             _state = State.MAIN_MENU;
             _settings = new Settings();
             _settings.DefaultSettings();
-            _mouseManager = new MouseManager();
             Settings.UpdateSingleton(_settings);
 
             base.Initialize();
@@ -54,7 +52,7 @@ namespace TentativeTitle
             
             // TODO: use this.Content to load your game content here
             ShapeGenerator.Initialize(GraphicsDevice);
-            _mouseManager.LoadContent(Content);
+            MouseManager.LoadContent(Content);
             
             
         }
@@ -67,7 +65,7 @@ namespace TentativeTitle
         {
             // TODO: Unload any non ContentManager content here
             _sceneCurrent.UnloadContent();
-            _mouseManager.UnloadContent();
+            MouseManager.UnloadContent();
         }
 
         /// <summary>
@@ -97,7 +95,7 @@ namespace TentativeTitle
             {
                 _sceneCurrent.Update(gameTime);
             }
-            _mouseManager.Update(gameTime);
+            MouseManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -117,7 +115,7 @@ namespace TentativeTitle
             {
                 _sceneCurrent.Draw(spriteBatch);
             }
-            _mouseManager.Draw(spriteBatch);
+            MouseManager.Draw(spriteBatch);
 
             spriteBatch.End();
 
