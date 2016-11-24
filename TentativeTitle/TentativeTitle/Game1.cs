@@ -13,7 +13,7 @@ namespace TentativeTitle
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private ScenePlay _playScene;
+        private Scene _sceneCurrent;
         private State _state;
 
 
@@ -32,7 +32,7 @@ namespace TentativeTitle
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _playScene = new ScenePlay();
+            _state = State.MAIN_MENU;
 
             base.Initialize();
         }
@@ -46,7 +46,8 @@ namespace TentativeTitle
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
-            _playScene.LoadContent(Content);
+            ShapeGenerator.Initialize(GraphicsDevice);
+            
         }
 
         /// <summary>
@@ -56,7 +57,7 @@ namespace TentativeTitle
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-            _playScene.UnloadContent();
+            
         }
 
         /// <summary>
@@ -70,7 +71,20 @@ namespace TentativeTitle
                 Exit();
 
             // TODO: Add your update logic here
-            _playScene.Update(gameTime);
+            if (_sceneCurrent == null)
+            {
+                switch (_state)
+                {
+                    case State.MAIN_MENU:
+                        _sceneCurrent = new SceneMainMenu();
+                        _sceneCurrent.LoadContent(Content);
+                        break;
+                }
+            }
+            else
+            {
+                _sceneCurrent.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -85,7 +99,12 @@ namespace TentativeTitle
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            _playScene.Draw(spriteBatch);
+                
+            if (_sceneCurrent != null)
+            {
+                _sceneCurrent.Draw(spriteBatch);
+            }
+
             spriteBatch.End();
 
             base.Draw(gameTime);

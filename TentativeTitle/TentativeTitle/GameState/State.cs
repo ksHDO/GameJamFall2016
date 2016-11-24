@@ -8,5 +8,6 @@ namespace TentativeTitle.GameState
 {
     enum State
     {
+        MAIN_MENU, PLAY
     }
 }
