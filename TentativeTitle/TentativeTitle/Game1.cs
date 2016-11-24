@@ -13,7 +13,7 @@ namespace TentativeTitle
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private PlayScene _playScene;
+        private ScenePlay _playScene;
         private State _state;
 
 
@@ -32,7 +32,7 @@ namespace TentativeTitle
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _playScene = new PlayScene();
+            _playScene = new ScenePlay();
 
             base.Initialize();
         }

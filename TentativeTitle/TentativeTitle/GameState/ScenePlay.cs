@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TentativeTitle.GameState
 {
-    class PlayScene : Scene
+    class ScenePlay : Scene
     {
         public void Draw(SpriteBatch batch)
         {
