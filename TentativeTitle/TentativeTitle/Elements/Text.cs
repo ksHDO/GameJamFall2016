@@ -29,10 +29,19 @@ namespace TentativeTitle.Elements
         private string _text;
         private TextAlignment _textAlignment = TextAlignment.Left;
 
-        public void SetFont(SpriteFont font)
-        { _font = font; }
-        public void SetString(string text)
-        { _text = text; }
+        public SpriteFont Font
+        {
+            set { _font = value; }
+        }
+        public string String
+        {
+            set
+            {
+                _text = value;
+                _size = _font.MeasureString(_text);
+            }
+        }
+
         public void SetTextAlignment(TextAlignment textAlign)
         { _textAlignment = textAlign; }
 
@@ -46,22 +55,22 @@ namespace TentativeTitle.Elements
 
         public Text(SpriteFont font, string text, Vector2 position, Color color, TextAlignment textAlign) : base(position, color)
         {
-            SetFont(font);
-            SetString(text);
+            Font = font;
+            String = text;
             SetTextAlignment(textAlign);
         }
 
         public Text(SpriteFont font, string text, Vector2 position, Align align, Color color, TextAlignment textAlign) : base(position, align, color)
         {
-            SetFont(font);
-            SetString(text);
+            Font = font;
+            String = text;
             SetTextAlignment(textAlign);
         }
 
         private Vector2 AlignText()
         {
             Vector2 output = Vector2.Zero;
-            Vector2 measurement = _font.MeasureString(_text);
+            Vector2 measurement = _size;
 
             int vertAlign = VAlignToInt(_textAlignment);
             int horzAlign = HAlignToInt(_textAlignment);

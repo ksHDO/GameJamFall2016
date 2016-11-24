@@ -29,7 +29,7 @@ namespace TentativeTitle.Elements
         /// <summary>
         /// Position of the object without Alignment,
         /// </summary>
-        private Vector2 _rawPosition;
+        protected Vector2 _rawPosition;
         /// <summary>
         /// Position of the object with Alignment.
         /// </summary>
@@ -54,7 +54,7 @@ namespace TentativeTitle.Elements
         public void SetPosition(Vector2 position)
         {
             _rawPosition = position;
-            _position = _position + GetAlignedPosition();
+            _position = _rawPosition + GetAlignedPosition();
         }
 
         public void SetEffect(Effect effect)

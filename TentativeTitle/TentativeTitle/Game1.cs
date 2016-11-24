@@ -53,6 +53,7 @@ namespace TentativeTitle
             // TODO: use this.Content to load your game content here
             ShapeGenerator.Initialize(GraphicsDevice);
             
+            
         }
 
         /// <summary>
@@ -75,6 +76,8 @@ namespace TentativeTitle
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            MouseInput.Update();
+            KeyboardInput.Update();
             // TODO: Add your update logic here
             if (_sceneCurrent == null)
             {

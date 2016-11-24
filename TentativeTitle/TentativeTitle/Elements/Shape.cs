@@ -11,9 +11,19 @@ namespace TentativeTitle.Elements
 
     class Shape : ElementObject
     {
+        protected Vector2 _size;
+         
         public Shape(Vector2 position, Color color) : base(position, color)
         { }
         public Shape(Vector2 position, Align align, Color color) : base(position, align, color)
         { }
+
+        public Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle(_position.ToPoint(), _size.ToPoint());
+            }
+        }
     }
 }
