@@ -16,6 +16,8 @@ namespace TentativeTitle.GameState
         private Song _song;
         public void Draw(SpriteBatch batch)
         {
+
+
         }
 
         public void LoadContent(ContentManager content)

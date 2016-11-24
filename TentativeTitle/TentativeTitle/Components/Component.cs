@@ -27,9 +27,11 @@ namespace TentativeTitle.Components
         {
             return _owner.GetComponent<T>();
         }
-
-        virtual public void Load()
-        { }
+        
+        virtual public bool Load()
+        {
+            return true;
+        }
         virtual public void Update(GameTime time)
         { }
 
