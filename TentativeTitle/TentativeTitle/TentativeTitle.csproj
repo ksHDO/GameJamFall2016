@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components\Component.cs" />
+    <Compile Include="Components\ComponentTransform.cs" />
     <Compile Include="Components\Entity.cs" />
     <Compile Include="Components\EntityManager.cs" />
     <Compile Include="FileReadWriter.cs" />
