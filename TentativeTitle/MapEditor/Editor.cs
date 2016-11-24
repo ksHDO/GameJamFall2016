@@ -73,7 +73,7 @@ namespace MapEditor
 
         private void CreateNewMap()
         {
-            CurrentMap = new Map(_contentLoader, "tileset2", 30, 30, 32);
+            CurrentMap = new Map(_contentLoader, "tileset1", 30, 30, 32);
         }
 
         private void OpenTextures()
