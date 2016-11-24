@@ -13,10 +13,27 @@ namespace TentativeTitle
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private Scene _sceneCurrent;
-        private State _state;
-        public Settings _settings;
+        private static Scene _sceneCurrent;
+        private static State _state;
+        public static Settings _settings;
+        private static bool _stateChanged = false;
 
+        public static State State
+        {
+            get
+            {
+                return _state; 
+            }
+            set
+            {
+                if (_sceneCurrent != null)
+                {
+                    _sceneCurrent.UnloadContent();
+                    _sceneCurrent = null;
+                }
+                _state = value;
+            }
+        }
 
         public Game1()
         {
@@ -64,7 +81,11 @@ namespace TentativeTitle
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-            _sceneCurrent.UnloadContent();
+            if (_sceneCurrent != null)
+            {
+                _sceneCurrent.UnloadContent();
+            }
+
             MouseManager.UnloadContent();
         }
 
@@ -81,10 +102,14 @@ namespace TentativeTitle
             MouseInput.Update();
             KeyboardInput.Update();
             // TODO: Add your update logic here
+            MouseManager.Update(gameTime);
             if (_sceneCurrent == null)
             {
                 switch (_state)
                 {
+                    case State.QUIT:
+                        Exit();
+                        break;
                     case State.MAIN_MENU:
                         _sceneCurrent = new SceneMainMenu();
                         _sceneCurrent.LoadContent(Content);
@@ -95,7 +120,7 @@ namespace TentativeTitle
             {
                 _sceneCurrent.Update(gameTime);
             }
-            MouseManager.Update(gameTime);
+
 
             base.Update(gameTime);
         }

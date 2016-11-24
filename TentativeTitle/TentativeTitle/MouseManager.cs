@@ -27,7 +27,7 @@ namespace TentativeTitle
             Texture2D currentCursor = GetCurrentCursorTexture(CurrentCursor);
             Vector2 mousePos = MouseInput.LastPos;
             Vector2 cursorOffset = GetCurrentCursorBounds(CurrentCursor, currentCursor);
-            batch.Draw(currentCursor, mousePos + cursorOffset, Color.White);
+            batch.Draw(currentCursor, mousePos + cursorOffset, null, Color.White, 0, Vector2.Zero, 2.0f, SpriteEffects.None, 0);
         }
 
         private static Texture2D GetCurrentCursorTexture(Cursor cursor)

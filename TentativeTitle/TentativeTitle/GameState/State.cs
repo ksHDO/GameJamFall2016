@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TentativeTitle.GameState
 {
-    enum State
+    public enum State
     {
-        MAIN_MENU, PLAY
+        QUIT, MAIN_MENU, PLAY
     }
 }

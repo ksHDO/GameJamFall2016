@@ -123,5 +123,10 @@ namespace TentativeTitle.Elements
             batch.DrawString(_font, _text, _position + AlignText(), _color);
         }
 
+        public override Rectangle GetBoundingBox()
+        {
+            return new Rectangle((_position + AlignText()).ToPoint(), _size.ToPoint());
+        }
+
     }
 }

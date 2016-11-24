@@ -18,12 +18,9 @@ namespace TentativeTitle.Elements
         public Shape(Vector2 position, Align align, Color color) : base(position, align, color)
         { }
 
-        public Rectangle BoundingBox
+        public virtual Rectangle GetBoundingBox()
         {
-            get
-            {
-                return new Rectangle(_position.ToPoint(), _size.ToPoint());
-            }
+            return new Rectangle(_position.ToPoint(), _size.ToPoint());
         }
     }
 }
