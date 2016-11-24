@@ -16,12 +16,14 @@ namespace TentativeTitle.GameState
         private Text _textTesting;
         private Text _textPlay;
         private Text _textQuit;
+        private Sprite2D _spriteTest;
 
         public void Draw(SpriteBatch batch)
         {
             _textTesting.Draw(batch);
             _textPlay.Draw(batch);
             _textQuit.Draw(batch);
+            _spriteTest.Draw(batch);
         }
 
         public void LoadContent(ContentManager content)
@@ -30,6 +32,8 @@ namespace TentativeTitle.GameState
             _textTesting = new Text(_fontVisitor, "Testing", Vector2.Zero, Align.CenterMid, Color.White, TextAlignment.CenterMid);
             _textPlay = new Text(_fontVisitor, "Play", new Vector2(0, 50), Align.CenterMid, Color.White, TextAlignment.CenterMid);
             _textQuit = new Text(_fontVisitor, "Quit Game", new Vector2(0, 100), Align.CenterMid, Color.White, TextAlignment.CenterMid);
+
+            _spriteTest = new Sprite2D(content, @"sprites/objects/warpBall", Vector2.Zero, Color.White);
         }
 
         public void UnloadContent()

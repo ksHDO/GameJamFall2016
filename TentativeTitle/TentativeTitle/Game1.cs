@@ -114,6 +114,10 @@ namespace TentativeTitle
                         _sceneCurrent = new SceneMainMenu();
                         _sceneCurrent.LoadContent(Content);
                         break;
+                    case State.PLAY:
+                        _sceneCurrent = new ScenePlay();
+                        _sceneCurrent.LoadContent(Content);
+                        break;
                 }
             }
             else

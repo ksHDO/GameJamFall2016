@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace TentativeTitle.GameState
 {
@@ -18,7 +19,7 @@ namespace TentativeTitle.GameState
 
         public void LoadContent(ContentManager content)
         {
-
+            MouseManager.CurrentCursor = MouseManager.Cursor.CROSSHAIR;
         }
 
         public void UnloadContent()
