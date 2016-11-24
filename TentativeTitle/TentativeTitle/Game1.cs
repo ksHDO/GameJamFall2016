@@ -15,6 +15,7 @@ namespace TentativeTitle
 
         private Scene _sceneCurrent;
         private State _state;
+        public Settings _settings;
 
 
         public Game1()
@@ -33,6 +34,9 @@ namespace TentativeTitle
         {
             // TODO: Add your initialization logic here
             _state = State.MAIN_MENU;
+            _settings = new Settings();
+            _settings.DefaultSettings();
+            Settings.UpdateSingleton(_settings);
 
             base.Initialize();
         }
@@ -45,6 +49,7 @@ namespace TentativeTitle
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            
             // TODO: use this.Content to load your game content here
             ShapeGenerator.Initialize(GraphicsDevice);
             
@@ -95,7 +100,7 @@ namespace TentativeTitle
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
