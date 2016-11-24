@@ -39,13 +39,13 @@ namespace TentativeTitle.GameState
 
         public void Update(GameTime gameTime)
         {
-            // MouseManager.CurrentCursor = MouseManager.Cursor.CROSSHAIR;
             if (MouseInput.CheckLeftPressed())
             {
-                Vector2 mousePos = MouseInput.LastPos;
-                Rectangle quitBoundingBox = _textQuit.GetBoundingBox();
-                if ((mousePos.X >= quitBoundingBox.X && mousePos.Y >= quitBoundingBox.Y) &&
-                    (mousePos.X < quitBoundingBox.Right && mousePos.Y < quitBoundingBox.Bottom))
+                if (_textPlay.IsClicked())
+                {
+                    Game1.State = State.PLAY;
+                }
+                else if (_textQuit.IsClicked())
                 {
                     Game1.State = State.QUIT;
                 }
