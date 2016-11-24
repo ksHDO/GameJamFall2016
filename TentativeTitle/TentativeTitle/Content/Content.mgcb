@@ -13,12 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin music/AVoid.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:music/AVoid.wav
-
 #begin fonts/visitor.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -61,12 +55,6 @@
 /processorParam:TextureFormat=Color
 /build:sprites/objects/warpBall.png
 
-#begin music/AVoid.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:music/AVoid.mp3
-
 #begin sprites/player/Character.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -78,4 +66,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:sprites/player/Character.png
+
+#begin music/AVoid.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/AVoid.ogg
 
