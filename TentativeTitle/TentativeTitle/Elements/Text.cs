@@ -45,15 +45,13 @@ namespace TentativeTitle.Elements
         public void SetTextAlignment(TextAlignment textAlign)
         { _textAlignment = textAlign; }
 
-        public Text(SpriteFont font, string text, Vector2 position, Color color) : this(font, text, position, color, TextAlignment.Left)
+        public Text(SpriteFont font, string text, Vector2 position, Color color, float rotation = 0.0f, Vector2? origin = null, float scale = 1.0f, SpriteEffects spriteEffect = SpriteEffects.None, float layerDepth = 0.0f)
+            : this(font, text, position, color, TextAlignment.Left, rotation, origin, scale, spriteEffect, layerDepth)
         {
         }
 
-        public Text(SpriteFont font, string text, Vector2 position, Align align, Color color) : this(font, text, position, align, color, TextAlignment.Left)
-        {
-        }
-
-        public Text(SpriteFont font, string text, Vector2 position, Color color, TextAlignment textAlign) : base(position, color)
+        public Text(SpriteFont font, string text, Vector2 position, Color color, TextAlignment textAlign = TextAlignment.Left, float rotation = 0.0f, Vector2? origin = null, float scale = 1.0f, SpriteEffects spriteEffect = SpriteEffects.None, float layerDepth = 0.0f)
+            : base(position, color, rotation, origin, scale, spriteEffect, layerDepth)
         {
             Font = font;
             String = text;
@@ -120,7 +118,7 @@ namespace TentativeTitle.Elements
 
         override public void Draw(SpriteBatch batch)
         {
-            batch.DrawString(_font, _text, _position + AlignText(), _color);
+            batch.DrawString(_font, _text, _position + AlignText(), _color, Rotation, Origin, Scale, SpriteEffect, LayerDepth);
         }
 
         public override Rectangle GetBoundingBox()

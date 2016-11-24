@@ -23,6 +23,9 @@ namespace TentativeTitle.Elements
         Bottom = LeftBottom
     }
 
+    /// <summary>
+    /// Element Object. Note that all objects that derive from this class are not intended to function as entities.
+    /// </summary>
     class ElementObject
     {
         protected Effect _effect;

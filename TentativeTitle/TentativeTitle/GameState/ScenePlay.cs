@@ -11,6 +11,7 @@ namespace TentativeTitle.GameState
 {
     class ScenePlay : Scene
     {
+        
         public void Draw(SpriteBatch batch)
         {
         }
