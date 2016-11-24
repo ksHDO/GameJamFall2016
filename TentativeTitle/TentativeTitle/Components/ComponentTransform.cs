@@ -14,6 +14,30 @@ namespace TentativeTitle.Components
         float _rotate;
         float _scale;
 
+       public Vector2 Translate
+        {
+            get
+            {
+                return _translate;
+            }
+        }
+
+        public float Rotate
+        {
+            get
+            {
+                return _rotate;
+            }
+        }
+
+        public float Scale
+        {
+            get
+            {
+                return _scale;
+            }
+        }
+
         public Transform(Vector2 translate = new Vector2(), float rotate = 0.0f, float scale = 0.0f)
         {
             _translate = translate;
@@ -31,8 +55,8 @@ namespace TentativeTitle.Components
     class ComponentTransform : Component
     {
 
-        Transform _transform;
-        ComponentTransform _parent;
+        Transform           _transform;
+        ComponentTransform  _parent;
 
         public Transform LocalTransform
         {
