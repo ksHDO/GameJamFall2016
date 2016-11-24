@@ -57,5 +57,64 @@ namespace TentativeTitle
             rect.SetData(data);
             return rect;
         }
+
+        public static Texture2D GenerateCircle(int radius, Color color)
+        {
+            int diameter = radius * 2;
+            Texture2D circle = new Texture2D(_graphics, diameter, diameter);
+            Color[] data = new Color[diameter * diameter];
+
+            for (int i = 0; i < data.Length; i++)
+                data[i] = Color.Transparent;
+
+            double step = 1.0f / radius;
+
+            for (double angle = 0; angle < Math.PI * 2; angle += step)
+            {
+                int x = (int)(radius + radius * Math.Cos(angle));
+                int y = (int)(radius + radius * Math.Sin(angle));
+
+                data[y * diameter + x] = color;
+            }
+
+            for (int i = 0; i < diameter; i++)
+            {
+                int yStart = -1;
+                int yEnd = -1;
+
+                for (int j = 0; j < diameter; j++)
+                {
+                    if (yStart == -1)
+                    {
+                        if (j == diameter - 1)
+                        {
+                            break;
+                        }
+
+                        if (data[i + (j * diameter)] == color &&
+                            data[i + ((j + 1) * diameter)] == Color.Transparent)
+                        {
+                            yStart = j + 1;
+                            continue;
+                        }
+                    }
+                    else if (data[i + (j * diameter)] == color)
+                    {
+                        yEnd = j;
+                        break;
+                    }
+                }
+                if (yStart != -1 && yEnd != -1)
+                {
+                    for (int j = yStart; j < yEnd; j++)
+                    {
+                        data[i + (j * diameter)] = color;
+                    }
+                }
+            }
+
+            circle.SetData(data);
+            return circle;
+        }
     }
 }
