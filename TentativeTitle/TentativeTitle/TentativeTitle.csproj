@@ -43,11 +43,20 @@
     <Compile Include="Components\ComponentTransform.cs" />
     <Compile Include="Components\Entity.cs" />
     <Compile Include="Components\EntityManager.cs" />
+    <Compile Include="Elements\ElementExt.cs" />
+    <Compile Include="Elements\ElementObject.cs" />
+    <Compile Include="Elements\Shape.cs" />
+    <Compile Include="Elements\Sprite2D.cs" />
+    <Compile Include="Elements\Text.cs" />
     <Compile Include="FileReadWriter.cs" />
     <Compile Include="GameState\SceneMainMenu.cs" />
     <Compile Include="GameState\ScenePlay.cs" />
     <Compile Include="GameState\Scene.cs" />
     <Compile Include="GameState\State.cs" />
+    <Compile Include="KeyboardInput.cs" />
+    <Compile Include="MouseInput.cs" />
+    <Compile Include="MouseManager.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="ShapeGenerator.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
@@ -62,6 +71,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
