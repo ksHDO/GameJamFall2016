@@ -11,25 +11,21 @@ namespace TentativeTitle.Components
     class Entity
     {
         private static int _currentID = 0;
-        private int _id;
+
         protected const int MAX_COMPONENTS = 20;
         protected Component[] _components;
         protected int _componentIndex = 0;
 
+        public int ID { get; private set; }
         public string Name { get;}
         public bool IsEnabled { get; set; }
 
         public Entity(string name, bool enabled)
         {
-            _id = _currentID++;
+            ID = _currentID++;
             _components = new Component[MAX_COMPONENTS];
             Name = name;
             IsEnabled = enabled;
-        }
-
-        public int GetID()
-        {
-            return _id;
         }
 
         public bool AddComponent(Component component)
