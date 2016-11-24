@@ -8,19 +8,20 @@ namespace TentativeTitle.Components
 {
     class Component
     {
-        public string _name { get; }
-        public string _description { get; } = "A component.";
-        public bool _isEnabled { get; set; } = true;
+        public string Name { get; }
+        public string Description { get; } = "A component.";
+        public bool IsEnabled { get; set; } = true;
         public Entity _owner;
 
-        public Component(string name)
+        public Component(string name, bool isEnabled = true)
         {
-            _name = name;
+            Name = name;
+            IsEnabled = isEnabled;
         }
         public Component(string name, string description)
         {
-            _name = name;
-            _description = description;
+            Name = name;
+            Description = description;
         }
         public Component GetSiblingComponent<T>()
         {
@@ -34,7 +35,7 @@ namespace TentativeTitle.Components
 
         public override string ToString()
         {
-            return _name + " - " + _description;
+            return Name + " - " + Description;
         }
     }
 }

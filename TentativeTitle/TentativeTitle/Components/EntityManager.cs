@@ -17,16 +17,16 @@ namespace TentativeTitle.Components
         {
             for (int i = 0; i < _entityIndex; i++)
             {
-                if (_entities[i]._name == entity._name)
+                if (_entities[i].Name == entity.Name)
                 {
-                    Console.Write("Entity::AddComponents - Entity already contains a component with that name! Could not add [" + entity._name + "] " + entity.GetType().ToString() + "\n");
+                    Console.Write("Entity::AddComponents - Entity already contains a component with that name! Could not add [" + entity.Name + "] " + entity.GetType().ToString() + "\n");
                     return false;
                 }
             }
 
             if (_entityIndex == MAX_ENTITIES)
             {
-                Console.Write("Entity::AddComponents - Entity has reached maximum amount of components! Could not add [" + entity._name + "] " + entity.GetType().ToString() + "\n");
+                Console.Write("Entity::AddComponents - Entity has reached maximum amount of components! Could not add [" + entity.Name + "] " + entity.GetType().ToString() + "\n");
                 return false;
             }
 
@@ -51,7 +51,7 @@ namespace TentativeTitle.Components
         {
             for (int i = 0; i < _entityIndex; i++)
             {
-                if (_entities[i]._name == name)
+                if (_entities[i].Name == name)
                 {
                     return _entities[i];
                 }
@@ -67,10 +67,10 @@ namespace TentativeTitle.Components
         {
             for (int i = 0; i < _entityIndex; i++)
             {
-                //if (_entities[i])
-                //{
-                //    _entities[i].Update(time);
-                //}
+                if (_entities[i].IsEnabled)
+                {
+                    _entities[i].Update(time);
+                }
             }
         }
 
