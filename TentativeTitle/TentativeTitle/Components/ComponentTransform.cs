@@ -46,7 +46,14 @@ namespace TentativeTitle.Components
         {
             get
             {
-                return _transform + ((_parent != null) ? _parent.WorldTransform : new Transform());
+                if(_parent == null)
+                {
+                    return _transform;
+                }
+                else
+                {
+                    return _transform + _parent.WorldTransform;
+                }
             }
         }
 
