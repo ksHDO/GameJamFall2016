@@ -98,8 +98,8 @@ namespace TentativeTitle
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-                
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
+
             if (_sceneCurrent != null)
             {
                 _sceneCurrent.Draw(spriteBatch);
