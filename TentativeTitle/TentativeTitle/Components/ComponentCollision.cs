@@ -80,6 +80,11 @@ namespace TentativeTitle.Components
             //}
         }
 
+        public RectF_IntersectSide GetCollisionNormal(RectangleF other)
+        {
+            return Collider.IntersectSide(other);
+        }
+
         public RectF_IntersectSide GetCollisionNormal(ComponentCollision other)
         {
             RectangleF otherCollider = other.Collider;
@@ -142,6 +147,30 @@ namespace TentativeTitle.Components
             return other.Collider.Right - Collider.Left;
         }
 
+
+
+        public float GetOverlapAmountBottom(RectangleF other)
+        {
+            return Collider.Bottom - other.Top;
+        }
+
+        public float GetOverlapAmountTop(RectangleF other)
+        {
+            return other.Bottom - Collider.Top;
+        }
+
+        public float GetOverlapAmountRight(RectangleF other)
+        {
+            return Collider.Right - other.Left;
+        }
+
+        public float GetOverlapAmountLeft(RectangleF other)
+        {
+            return other.Right - Collider.Left;
+        }
+
+
+
         private float Fabs(float f)
         {
             return f < 0 ? -f : f;
@@ -163,6 +192,28 @@ namespace TentativeTitle.Components
         }
 
         public float GetDistanceLeft(ComponentCollision other)
+        {
+            return Fabs(GetOverlapAmountLeft(other));
+        }
+
+        //----------------
+
+        public float GetDistanceBottom(RectangleF other)
+        {
+            return Fabs(GetOverlapAmountBottom(other));
+        }
+
+        public float GetDistanceTop(RectangleF other)
+        {
+            return Fabs(GetOverlapAmountTop(other));
+        }
+
+        public float GetDistanceRight(RectangleF other)
+        {
+            return Fabs(GetOverlapAmountRight(other));
+        }
+
+        public float GetDistanceLeft(RectangleF other)
         {
             return Fabs(GetOverlapAmountLeft(other));
         }
