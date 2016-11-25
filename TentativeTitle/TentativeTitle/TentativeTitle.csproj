@@ -41,7 +41,9 @@
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\ComponentCollision.cs" />
     <Compile Include="Components\ComponentGravity.cs" />
+    <Compile Include="Components\ComponentMovement.cs" />
     <Compile Include="Components\ComponentPhysics.cs" />
+    <Compile Include="Components\ComponentRigidbody.cs" />
     <Compile Include="Components\ComponentSprite.cs" />
     <Compile Include="Components\ComponentTransform.cs" />
     <Compile Include="Components\Entity.cs" />
@@ -51,6 +53,8 @@
     <Compile Include="Elements\Shape.cs" />
     <Compile Include="Elements\Sprite2D.cs" />
     <Compile Include="Elements\Text.cs" />
+    <Compile Include="Entities\EntityPlatform.cs" />
+    <Compile Include="Entities\EntityProjectile.cs" />
     <Compile Include="Entities\EntitySprite.cs" />
     <Compile Include="FileReadWriter.cs" />
     <Compile Include="GameState\SceneMainMenu.cs" />
@@ -60,6 +64,7 @@
     <Compile Include="KeyboardInput.cs" />
     <Compile Include="MouseInput.cs" />
     <Compile Include="MouseManager.cs" />
+    <Compile Include="RectangleF.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ShapeGenerator.cs" />
     <Compile Include="Game1.cs" />

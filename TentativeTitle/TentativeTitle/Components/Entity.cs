@@ -35,7 +35,7 @@ namespace TentativeTitle.Components
             return true;
         }
 
-        public bool AddComponent(Component component)
+        public bool AddComponent(Component component, bool enabled = true)
         {
             for (int i = 0; i < _componentIndex; i++)
             {
@@ -59,6 +59,7 @@ namespace TentativeTitle.Components
 
             component._owner = this;
             _components[_componentIndex] = component;
+            _components[_componentIndex].IsEnabled = enabled;
             _componentIndex++;
             return true;
         }
@@ -100,7 +101,7 @@ namespace TentativeTitle.Components
             return null;
         }
 
-        public void Update(GameTime time)
+        public virtual void Update(GameTime time)
         {
             for (int i = 0; i < _componentIndex; i++)
             {

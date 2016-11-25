@@ -71,19 +71,20 @@ namespace TentativeTitle.Components
         Transform           _transform;
         ComponentTransform  _parent;
 
-        public int X
+
+        public float X
         {
             get
             {
-                return (int)_transform.Translate.X;
+                return _transform.Translate.X;
             }
         }
 
-        public int Y
+        public float Y
         {
             get
             {
-                return (int)_transform.Translate.Y;
+                return _transform.Translate.Y;
             }
         }
 
@@ -125,7 +126,7 @@ namespace TentativeTitle.Components
         {
             get
             {
-                return _transform.Translate;
+                return WorldTransform.Translate;
             }
             set
             {
@@ -149,6 +150,12 @@ namespace TentativeTitle.Components
 
         //    return new Transform(t1._translate + t2._translate , t1._rotate + t2._rotate, t1.Scale);
         //}
+
+        public override void Update(GameTime time)
+        {
+            
+        }
+
 
         public static Transform operator +(ComponentTransform child, ComponentTransform parent)
         {

@@ -10,9 +10,9 @@ namespace TentativeTitle
     
     public static class VectorExtensions
     {
-        public static Vector2 MultiplyLength(this Vector2 v, double d)
+        public static Vector2 MultiplyLength(this Vector2 v, float d)
         {
-            return new Vector2(v.X * (float)d, v.Y * (float)d);
+            return new Vector2(v.X * d, v.Y * d);
         }
 
         public static Vector2 Normalized(this Vector2 v)

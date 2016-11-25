@@ -9,7 +9,7 @@ namespace TentativeTitle.Components
 {
     class ComponentGravity : Component
     {
-        public float Gravity { get; set; } = -9.8f;
+        public float Gravity { get; set; } = -800.5f;//-9.8f;
         public ComponentGravity(bool isEnabled = true) : base("gravity", isEnabled)
         {
 
