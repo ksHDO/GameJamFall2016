@@ -38,7 +38,7 @@ namespace TentativeTitle.Components
         public Sprite(Texture2D tex = null)
         {
             _tex = tex;
-            _bounds = tex.Bounds;
+            _bounds = ((tex != null)? tex.Bounds : new Rectangle(0,0,0,0));
         }
 
         /// <summary>

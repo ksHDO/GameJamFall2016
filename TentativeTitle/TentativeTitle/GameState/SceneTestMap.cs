@@ -81,17 +81,27 @@ namespace TentativeTitle.GameState
                         && _map.Tiles[x, y].ID != 18
                         && _map.Tiles[x, y].ID != 19)
                     {
-                        _entityManager.AddEntity(new EntityPlatform("platform" + curPlat++, content.Load<Texture2D>(@"sprites/objects/warpBall"), new Vector2(x * (_map.TextureMap.TileWidth) * 2.0f, y * (_map.TextureMap.TileHeight * 2.0f)) - _position, new Vector2((_map.TextureMap.TileWidth * 2.0f), (_map.TextureMap.TileHeight * 2.0f)), true));
+                        //content.Load<Texture2D>(@"sprites/objects/warpBall")
+                        _entityManager.AddEntity(new EntityPlatform("platform" + curPlat++, null, new Vector2(x * (_map.TextureMap.TileWidth) * 2.0f, y * (_map.TextureMap.TileHeight * 2.0f)) - _position, new Vector2((_map.TextureMap.TileWidth * 2.0f), (_map.TextureMap.TileHeight * 2.0f)), true));
                     }
 
-                    //
+                    
                 }
             }
 
-            _entityManager.AddEntity(new EntityProjectile("player",
-               content.Load<Texture2D>(@"sprites/player/char1"),
-               new Vector2(400.0f,240.0f),
+            _entityManager.AddEntity(new EntityProjectile("warpBall",
+               content.Load<Texture2D>(@"sprites/objects/warpBall"),
+               new Vector2(400.0f, 240.0f),
                new Vector2(32.0f, 32.0f), true));
+            _entityManager.GetEntity("warpBall").GetComponent<ComponentTransform>().Scale = 0.3f;
+            _entityManager.GetEntity("warpBall").GetComponent<ComponentCollision>().SetSize(32.0f * 0.3f, 32.0f * 0.3f);
+            _entityManager.GetEntity("warpBall").GetComponent<ComponentPhysics>().DragX = 0.9999f;
+            //_oldPlayerPos = _entityManager.GetEntity("player").GetComponent<ComponentTransform>().WorldTransform.Translate;
+
+            _entityManager.AddEntity(new EntityProjectile("player",
+               content.Load<Texture2D>(@"sprites/player/Character"),
+               new Vector2(400.0f,240.0f),
+               new Vector2(32.0f, 64.0f), true));
 
             _oldPlayerPos = _entityManager.GetEntity("player").GetComponent<ComponentTransform>().WorldTransform.Translate;
         }
@@ -104,8 +114,8 @@ namespace TentativeTitle.GameState
 
         public void Update(GameTime gameTime)
         {
-            float speed = 50.0f;
-            float parallax = 0.07f;
+            //float speed = 50.0f;
+            float parallax = 0.075f;
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             ComponentTransform playerTransform = _entityManager.GetEntity("player").GetComponent<ComponentTransform>();
@@ -139,7 +149,7 @@ namespace TentativeTitle.GameState
 
             if (KeyboardInput.CheckIsPressed(Microsoft.Xna.Framework.Input.Keys.Space))
             {
-                if(!playerPhysics.InAir) playerPhysics.Velocity = new Vector2(playerPhysics.Velocity.X, -700.0f);
+                if(!playerPhysics.InAir) playerPhysics.Velocity = new Vector2(playerPhysics.Velocity.X, -450.0f);
             }
 
                 if (KeyboardInput.CheckIsKeyDown(Microsoft.Xna.Framework.Input.Keys.W))
@@ -170,7 +180,11 @@ namespace TentativeTitle.GameState
 
             if (MouseInput.CheckLeftPressed())
             {
-                _entityManager.GetEntity("player").GetComponent<ComponentTransform>().Pos = MouseInput.CurrentPos;
+                _entityManager.GetEntity("warpBall").GetComponent<ComponentTransform>().Pos = playerTransform.Pos + new Vector2(0,-50.0f);
+                ComponentPhysics ballPhys = _entityManager.GetEntity("warpBall").GetComponent<ComponentPhysics>();
+                ballPhys.Velocity =
+                    new Vector2(MouseInput.CurrentPos.X - playerTransform.Pos.X, MouseInput.CurrentPos.Y - playerTransform.Pos.Y)
+                    .Normalized().MultiplyLength(1000.0f);
             }
 
             if (KeyboardInput.CheckIsKeyDown(Microsoft.Xna.Framework.Input.Keys.E))

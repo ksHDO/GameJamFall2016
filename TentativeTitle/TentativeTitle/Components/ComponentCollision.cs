@@ -58,6 +58,9 @@ namespace TentativeTitle.Components
 
             _boundingBox.X = trans.X;
             _boundingBox.Y = trans.Y;
+
+            
+
             //Center();
             //ComponentTransform trans = GetSiblingComponent<ComponentTransform>();
             //foreach (ComponentCollision collider in ColliderList)

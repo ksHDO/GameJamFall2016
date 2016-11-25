@@ -11,13 +11,13 @@ namespace TentativeTitle.Entities
 {
     class EntitySprite : Entity
     {
-        ComponentTransform _transform;
+        
         public EntitySprite(string name, Texture2D tex, Vector2 pos = new Vector2(), bool enabled = true) : base(name,enabled)
         {
             //AddComponent(new ComponentPhysics());
             //AddComponent(new ComponentGravity());
-            _transform = new ComponentTransform();
-            AddComponent(_transform, false);
+            
+            //AddComponent(_transform, false);
             AddComponent(new ComponentSprite(tex));
             GetComponent<ComponentTransform>().Pos = pos;
         }
@@ -34,13 +34,13 @@ namespace TentativeTitle.Entities
             return GetComponent<ComponentSprite>().SetTexture(tex);
         }
 
-        public override void Update(GameTime time)
-        {
-            base.Update(time);
+        //public override void Update(GameTime time)
+        //{
+        //    base.Update(time);
 
-            _transform.Update(time);
+        //    //_transform.Update(time);
 
-        }
+        //}
 
         //public override bool Initialize()
         //{
@@ -50,11 +50,14 @@ namespace TentativeTitle.Entities
         public override void Draw(SpriteBatch batch)
         {
             Texture2D tex = GetComponent<ComponentSprite>().Texture;
-            ComponentTransform trans = GetComponent<ComponentTransform>();
-            if (trans != null)
+            if (tex != null)
             {
-                Transform worldTrans = trans.WorldTransform;
-                batch.Draw(tex, (worldTrans.Translate), null, Color.White, worldTrans.Rotate, new Vector2(), worldTrans.Scale, SpriteEffects.None, 0.0f);
+                ComponentTransform trans = GetComponent<ComponentTransform>();
+                if (trans != null)
+                {
+                    Transform worldTrans = trans.WorldTransform;
+                    batch.Draw(tex, (worldTrans.Translate), null, Color.White, worldTrans.Rotate, new Vector2(), worldTrans.Scale, SpriteEffects.None, 0.0f);
+                }
             }
         }
 
