@@ -56,7 +56,7 @@ namespace MapEditor
         private static bool     _toolsFillRectangleTextureSelected = false;
         private static Vector2  _toolsFillRectanglePos = new Vector2(Game1.Width - 64, 100 - 32);
         //---------------------------------------------------------------------------------------------
-
+        private static Texture2D _mapBackground;
 
         private static int _tileSelectionID = 0;
         public static int CurrentTileSelectionID { get; private set; } = 0;
@@ -84,6 +84,7 @@ namespace MapEditor
             _buttonToolsFillRectangle.SetEvent(ToggleFillRectangle);
             _buttonToolsFillRectangle.Position = _toolsFillRectanglePos;
             //-------------------------------------
+            _mapBackground = ShapeGenerator.GenerateRectangle(32, 32, new Color(50, 50, 80));
 
             CreateNewMap();
             DefaultValues();
@@ -92,6 +93,7 @@ namespace MapEditor
         private void CreateNewMap()
         {
             CurrentMap = new Map(_contentLoader, "tileset1", 30, 30, 32);
+
         }
 
         private void OpenTextures()
@@ -139,6 +141,7 @@ namespace MapEditor
             _buttonToolsFillBucket.Dispose();
             //-----------------------
             _buttonToolsFillRectangle.Dispose();
+            _mapBackground.Dispose();
         }
 
         public void Update(GameTime gameTime)
@@ -209,7 +212,10 @@ namespace MapEditor
             if (invalid)
                 Forms.MessageBox.Show("Invalid width/height!");
             else
+            {
                 CurrentMap.ChangeDimensions(width, height);
+            }
+
         }
 
         private void OpenMap()
@@ -549,6 +555,7 @@ namespace MapEditor
                     if ((position.X + textureTileWidth * _zoom > 0 && position.X < Game1.Width) &&
                        (position.Y + textureTileHeight * _zoom > 100 && position.Y < Game1.Height))
                     {
+                        spriteBatch.Draw(_mapBackground, position, null, Color.White, 0f, Vector2.Zero, _zoom, SpriteEffects.None, 0f);
                         spriteBatch.Draw(_mapTexture, position, CurrentMap.GetTileOnSheet(CurrentMap.Tiles[x, y].ID), Color.White, 0f, Vector2.Zero, _zoom, SpriteEffects.None, 0f);
                         if (ShowCollision)
                         {
