@@ -94,13 +94,7 @@ namespace TentativeTitle.GameState
                 }
             }
 
-            _entityManager.AddEntity(new EntityProjectile("warpBall",
-               content.Load<Texture2D>(@"sprites/objects/warpBall"),
-               new Vector2(400.0f, 240.0f),
-               new Vector2(32.0f, 32.0f), true));
-            _entityManager.GetEntity("warpBall").GetComponent<ComponentTransform>().Scale = 0.3f;
-            _entityManager.GetEntity("warpBall").GetComponent<ComponentCollision>().SetSize(32.0f * 0.3f, 32.0f * 0.3f);
-            _entityManager.GetEntity("warpBall").GetComponent<ComponentPhysics>().DragX = 0.9999f;
+           
             //_oldPlayerPos = _entityManager.GetEntity("player").GetComponent<ComponentTransform>().WorldTransform.Translate;
 
             _entityManager.AddEntity(new EntityProjectile("player",
@@ -109,6 +103,16 @@ namespace TentativeTitle.GameState
                new Vector2(32.0f, 64.0f), true));
 
             _oldPlayerPos = _entityManager.GetEntity("player").GetComponent<ComponentTransform>().WorldTransform.Translate;
+
+
+            _entityManager.AddEntity(new EntityProjectile("warpBall",
+              content.Load<Texture2D>(@"sprites/objects/warpBall"),
+              new Vector2(400.0f, 240.0f),
+              new Vector2(32.0f, 32.0f), true));
+            //_entityManager.GetEntity("warpBall").GetComponent<ComponentTransform>().SetParent(_entityManager.GetEntity("player").GetComponent<ComponentTransform>());
+            _entityManager.GetEntity("warpBall").GetComponent<ComponentTransform>().Scale = 0.6f;
+            _entityManager.GetEntity("warpBall").GetComponent<ComponentCollision>().SetSize(32.0f * 0.6f, 32.0f * 0.6f);
+            _entityManager.GetEntity("warpBall").GetComponent<ComponentPhysics>().DragX = 0.9999f;
         }
 
         public void UnloadContent()

@@ -143,7 +143,7 @@ namespace TentativeTitle.Components
             _transform = new Transform(new Vector2(),0.0f,1.0f);
         }
 
-        void SetParent(ComponentTransform parent = null)
+        public void SetParent(ComponentTransform parent = null)
         {
             _parent = parent;
         }

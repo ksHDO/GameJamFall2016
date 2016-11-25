@@ -108,7 +108,7 @@ namespace TentativeTitle.Components
                        
 
                         transform.Pos += new Vector2(((right) ? -xDiff : xDiff), 0.0f);
-                        physics.Velocity = new Vector2(0.0f, (physics.Velocity.Y));
+                        physics.Velocity = new Vector2(0.0f, ((physics.InAir) ? physics.Velocity.Y : 0.0f ));
                         break;
                     }
                 }
@@ -156,7 +156,7 @@ namespace TentativeTitle.Components
                         if(down) inAir = false;
                         //Transform worldTrans = transform.WorldTransform;
                         float yDiff = ((down) ? collision.GetOverlapAmountBottom(collider) : collision.GetOverlapAmountTop(collider));
-                        transform.Pos += new Vector2(0.0f, ((yDiff > 0) ? ((down) ? -yDiff : yDiff) : 0.0f));
+                        transform.Pos += new Vector2(0.0f, ((down) ? -yDiff : yDiff));
                         physics.Velocity = new Vector2(((physics.InAir) ? 0.0f : physics.Velocity.X), 0.0f);
                         break;
                     }
