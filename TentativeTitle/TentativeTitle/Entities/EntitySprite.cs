@@ -14,10 +14,11 @@ namespace TentativeTitle.Entities
 
         public EntitySprite(string name, Texture2D tex, Vector2 pos = new Vector2(), bool enabled = true) : base(name,enabled)
         {
+            AddComponent(new ComponentPhysics());
+            AddComponent(new ComponentGravity());
             AddComponent(new ComponentTransform());
             AddComponent(new ComponentSprite(tex));
-
-            ((ComponentTransform)GetComponent<ComponentTransform>()).SetPos(pos);
+            GetComponent<ComponentTransform>().Pos = pos;
         }
 
        // public override 

@@ -24,7 +24,7 @@ namespace TentativeTitle.Components
             Name = name;
             Description = description;
         }
-        public Component GetSiblingComponent<T>() where T : Component
+        public T GetSiblingComponent<T>() where T : Component
         {
             return _owner.GetComponent<T>();
         }

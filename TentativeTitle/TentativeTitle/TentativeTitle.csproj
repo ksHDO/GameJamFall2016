@@ -40,6 +40,8 @@
   <ItemGroup>
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\ComponentCollision.cs" />
+    <Compile Include="Components\ComponentGravity.cs" />
+    <Compile Include="Components\ComponentPhysics.cs" />
     <Compile Include="Components\ComponentSprite.cs" />
     <Compile Include="Components\ComponentTransform.cs" />
     <Compile Include="Components\Entity.cs" />

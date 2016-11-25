@@ -18,6 +18,8 @@ namespace TentativeTitle
         public static Settings _settings;
         private static bool _stateChanged = false;
 
+        
+
         public static State State
         {
             get

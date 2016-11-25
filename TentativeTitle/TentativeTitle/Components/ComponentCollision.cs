@@ -28,7 +28,7 @@ namespace TentativeTitle.Components
 
         public override bool Load()
         {
-            _transform = (ComponentTransform)_owner.GetComponent<ComponentTransform>();
+            _transform = _owner.GetComponent<ComponentTransform>();
             if (_transform == null)
             {
                 Console.WriteLine(Name + ": ComponentTransform does not exist in owner [" + _owner.Name + "]");
@@ -57,8 +57,8 @@ namespace TentativeTitle.Components
 
         private void Center()
         {
-            _boundingBox.X = _boundingBox.X - _boundingBox.Width/2;
-            _boundingBox.Y = _boundingBox.Y - _boundingBox.Height/2;
+            _boundingBox.X = _boundingBox.X - (int) (_boundingBox.Width /2.0f);
+            _boundingBox.Y = _boundingBox.Y - (int) (_boundingBox.Height/2.0f);
         }
 
         public bool IsCollided(ComponentCollision other)
@@ -86,32 +86,29 @@ namespace TentativeTitle.Components
             return other.Collider.Right - Collider.Left;
         }
 
-        //----------------- This is a meme: lol
-
         private float Fabs(float f)
         {
-            if (f < 0) return -f;
-            else return f;
+            return f < 0 ? -f : f;
         }
 
         public float GetDistanceBottom(ComponentCollision other)
         {
-            return Fabs(Collider.Bottom - other.Collider.Top);
+            return Fabs(GetOverlapAmountBottom(other));
         }
 
         public float GetDistanceTop(ComponentCollision other)
         {
-            return Fabs(Collider.Top - other.Collider.Bottom);
+            return Fabs(GetOverlapAmountTop(other));
         }
 
         public float GetDistanceRight(ComponentCollision other)
         {
-            return Fabs(Collider.Right - other.Collider.Left);
+            return Fabs(GetOverlapAmountRight(other));
         }
 
         public float GetDistanceLeft(ComponentCollision other)
         {
-            return Fabs(other.Collider.Right - Collider.Left);
+            return Fabs(GetOverlapAmountLeft(other));
         }
 
     }

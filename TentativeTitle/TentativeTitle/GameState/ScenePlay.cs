@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Media;
 using TentativeTitle.Components;
+using TentativeTitle.Entities;
 
 namespace TentativeTitle.GameState
 {
@@ -29,6 +30,8 @@ namespace TentativeTitle.GameState
             MediaPlayer.Play(_song);
             MediaPlayer.IsRepeating = true;
 
+            
+            _entityManager.AddEntity(new EntitySprite("testEntity", content.Load<Texture2D>(@"sprites/player/Character"), new Vector2(100, 100), true));
             _entityManager.LoadContent(content);
         }
 

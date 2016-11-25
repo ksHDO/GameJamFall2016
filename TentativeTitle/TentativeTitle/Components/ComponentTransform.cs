@@ -121,14 +121,16 @@ namespace TentativeTitle.Components
             }
         }
 
-        public void SetPos(Vector2 pos)
+        public Vector2 Pos
         {
-            _transform.Translate = pos;
-        }
-
-        public Vector2 GetPos()
-        {
-            return _transform.Translate;
+            get
+            {
+                return _transform.Translate;
+            }
+            set
+            {
+                _transform.Translate = value;
+            }
         }
 
         public ComponentTransform() : base("transform")
@@ -151,9 +153,7 @@ namespace TentativeTitle.Components
         public static Transform operator +(ComponentTransform child, ComponentTransform parent)
         {
             Matrix rotation = Matrix.CreateRotationZ(MathHelper.ToRadians(parent.WorldTransform.Rotate));
-            Vector3 threeTrans = new Vector3(child.LocalTransform.Translate, 1.0f);
             Transform parentTrans = parent.WorldTransform;
-            //threeTrans
             float parScale = parentTrans.Scale;
             Vector2 translate = parentTrans.Translate + (Vector2.Transform(child.LocalTransform.Translate, rotation) * parScale);
             float rotate = parentTrans.Rotate + child.LocalTransform.Rotate;
