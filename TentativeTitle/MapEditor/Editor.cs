@@ -44,18 +44,25 @@ namespace MapEditor
         private static float _toolbarScrollWidth = 200;
         private static bool _isToolbarScrolling = false;
 
-        private static Button _buttonToolsFillBucket;
 
-        private static bool _toolsFillBucketTextureSelected = false;
-        private static Vector2 _toolsFillBucketPos = new Vector2(Game1.Width - 32, 100 - 32);
+
 
 
         //-------------------------------| Rectangle Fill and UndoManager |----------------------------
         private static UndoManager _undoManager;
-        
-        private static Button   _buttonToolsFillRectangle;
 
-        private static bool     _toolsFillRectangleTextureSelected = false;
+        private enum SelectedTool
+        {
+            FILL_BUCKET, RECTANGLE, NONE
+        }
+        private SelectedTool _toolsSelectedTool = SelectedTool.NONE;
+
+        private static Button _buttonToolsFillBucket;
+        // private static bool _toolsFillBucketTextureSelected = false;
+        private static Vector2 _toolsFillBucketPos = new Vector2(Game1.Width - 32, 100 - 32);
+
+        private static Button   _buttonToolsFillRectangle;
+        // private static bool     _toolsFillRectangleTextureSelected = false;
         private static Vector2  _toolsFillRectanglePos = new Vector2(Game1.Width - 64, 100 - 32);
         //---------------------------------------------------------------------------------------------
         private static Texture2D _mapBackground;
@@ -375,13 +382,13 @@ namespace MapEditor
 
         private void ToggleFillBucket()
         {
-            _toolsFillBucketTextureSelected = !_toolsFillBucketTextureSelected;
+            _toolsSelectedTool = _toolsSelectedTool == SelectedTool.FILL_BUCKET ? SelectedTool.NONE : SelectedTool.FILL_BUCKET;
         }
 
         //-------------------------------------------------------------------------
         private void ToggleFillRectangle()
         {
-            _toolsFillRectangleTextureSelected = !_toolsFillRectangleTextureSelected;
+            _toolsSelectedTool = _toolsSelectedTool == SelectedTool.RECTANGLE ? SelectedTool.NONE : SelectedTool.RECTANGLE;
         }
         //-------------------------------------------------------------------------
 
@@ -413,7 +420,7 @@ namespace MapEditor
 
                 if (_mousePos.Y > 100 && _mousePos.Y < Game1.Height)
                 {
-                    if (_toolsFillRectangleTextureSelected) //------------------------- 
+                    if (_toolsSelectedTool == SelectedTool.RECTANGLE) //------------------------- 
                     {
                         
                         if (EditorDraw.FirstRectFillTileSelected)
@@ -459,11 +466,11 @@ namespace MapEditor
                 }
                 else if (_mousePos.Y > 100 && _mousePos.Y < Game1.Height)
                 {
-                    if (_toolsFillBucketTextureSelected)
+                    if (_toolsSelectedTool == SelectedTool.FILL_BUCKET)
                     {
                         EditorDraw.FillTile(CurrentTileSelectionID, _selectionX, _selectionY, ShowCollision);
                     }
-                    else if (!_toolsFillRectangleTextureSelected)
+                    else if (_toolsSelectedTool != SelectedTool.RECTANGLE)
                     {
                         EditorDraw.PlaceTile(CurrentTileSelectionID, _selectionX, _selectionY, ShowCollision);
                     }
@@ -605,10 +612,16 @@ namespace MapEditor
             // spriteBatch.Draw(_toolsFillBucketTexture, _toolsFillBucketPos, Color.White);
             _buttonToolsFillBucket.Draw(spriteBatch);
             _buttonToolsFillRectangle.Draw(spriteBatch);
-            if (_toolsFillBucketTextureSelected)
-                spriteBatch.Draw(_selectionRect, _toolsFillBucketPos, Color.White);
-            if (_toolsFillRectangleTextureSelected)
-                spriteBatch.Draw(_selectionRect, _toolsFillRectanglePos, Color.White);
+            switch (_toolsSelectedTool)
+            {
+                case SelectedTool.FILL_BUCKET:
+                    spriteBatch.Draw(_selectionRect, _toolsFillBucketPos, Color.White);
+                    break;
+                case SelectedTool.RECTANGLE:
+                    spriteBatch.Draw(_selectionRect, _toolsFillRectanglePos, Color.White);
+                    break;
+
+            }
 
         }
 
