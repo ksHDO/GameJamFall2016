@@ -16,6 +16,7 @@ namespace TentativeTitle.GameState
         private Text _textTesting;
         private Text _textPlay;
         private Text _textQuit;
+        private Text _textTestMap;
         private Sprite2D _spriteTest;
 
         public void Draw(SpriteBatch batch)
@@ -24,6 +25,7 @@ namespace TentativeTitle.GameState
             _textPlay.Draw(batch);
             _textQuit.Draw(batch);
             _spriteTest.Draw(batch);
+            _textTestMap.Draw(batch);
         }
 
         public void LoadContent(ContentManager content)
@@ -32,6 +34,7 @@ namespace TentativeTitle.GameState
             _textTesting = new Text(_fontVisitor, "Testing", Vector2.Zero, Align.CenterMid, Color.White, TextAlignment.CenterMid);
             _textPlay = new Text(_fontVisitor, "Play", new Vector2(0, 50), Align.CenterMid, Color.White, TextAlignment.CenterMid);
             _textQuit = new Text(_fontVisitor, "Quit Game", new Vector2(0, 100), Align.CenterMid, Color.White, TextAlignment.CenterMid);
+            _textTestMap = new Text(_fontVisitor, "Test Map", new Vector2(0, 10), Align.Right, Color.Red, TextAlignment.Right);
 
             _spriteTest = new Sprite2D(content, @"sprites/objects/warpBall", Vector2.Zero, Color.White, 0, null, 0.5f, SpriteEffects.None, 0);
         }
@@ -52,6 +55,9 @@ namespace TentativeTitle.GameState
                 else if (_textQuit.IsClicked())
                 {
                     Game1.State = State.QUIT;
+                } else if (_textTestMap.IsClicked())
+                {
+                    Game1.State = State.TEST_MAP;
                 }
             }
         }

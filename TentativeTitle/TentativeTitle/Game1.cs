@@ -114,13 +114,16 @@ namespace TentativeTitle
                         break;
                     case State.MAIN_MENU:
                         _sceneCurrent = new SceneMainMenu();
-                        _sceneCurrent.LoadContent(Content);
                         break;
                     case State.PLAY:
                         _sceneCurrent = new ScenePlay();
-                        _sceneCurrent.LoadContent(Content);
                         break;
+                    case State.TEST_MAP:
+                        _sceneCurrent = new SceneTestMap();
+                        break;
+
                 }
+                _sceneCurrent.LoadContent(Content);
             }
             else
             {

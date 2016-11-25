@@ -8,6 +8,6 @@ namespace TentativeTitle.GameState
 {
     public enum State
     {
-        QUIT, MAIN_MENU, PLAY
+        QUIT, MAIN_MENU, PLAY, TEST_MAP
     }
 }
