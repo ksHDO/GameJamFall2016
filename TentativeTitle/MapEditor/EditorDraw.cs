@@ -7,10 +7,36 @@ using System.Threading.Tasks;
 
 namespace MapEditor
 {
+
+    public struct EditorDrawTile
+    {
+        public int X { get; private set; }
+        public int Y { get; private set; }
+
+        public EditorDrawTile(int x = 0, int y = 0)
+        {
+            X = x;
+            Y = y;
+        }
+    }
+
     class EditorDraw
     {
         public static Map CurrentMap { get; set; }
 
+
+        //-------------------- Stored tile
+        private static EditorDrawTile? _firstRectangleSelection = null;
+        public static bool FirstRectFillTileSelected { get; private set; } = false;
+        //--------------------
+
+        
+        public static void ClearToolsRectSelection()
+        {
+            _firstRectangleSelection = null;
+            FirstRectFillTileSelected = false;
+        }
+        
 
         // public void PlaceTile(int xID, int yID, bool collidable = false)
         // {
@@ -24,6 +50,55 @@ namespace MapEditor
         //     CurrentMap.Tiles[_selectionX, _selectionY].X = xID;
         //     CurrentMap.Tiles[_selectionX, _selectionY].Collidable = collidable;
         // }
+
+        public static void SelectTile(int x, int y)
+        {
+            ClearToolsRectSelection();
+            _firstRectangleSelection = new EditorDrawTile(x, y);
+            FirstRectFillTileSelected = true;
+        }
+
+        public static void ExecuteRectangleFill(int xID, int x, int y)
+        {
+            if (_firstRectangleSelection != null)
+            {
+                int fromX;
+                int toX;
+                int fromY;
+                int toY;
+
+                if (_firstRectangleSelection.Value.X <= x)
+                {
+                    fromX = _firstRectangleSelection.Value.X;
+                    toX = x;
+                }
+                else
+                {
+                    fromX = x;
+                    toX = _firstRectangleSelection.Value.X;
+                }
+
+                if (_firstRectangleSelection.Value.Y <= y)
+                {
+                    fromY = _firstRectangleSelection.Value.Y;
+                    toY = y;
+                }
+                else
+                {
+                    fromY = y;
+                    toY = _firstRectangleSelection.Value.Y;
+                }
+
+                for (int xt = fromX; xt <= toX; xt++)
+                {
+                    for (int yt = fromY; yt <= toY; yt++)
+                    {
+                        PlaceTile(xID, xt, yt);
+                    }
+                }
+            }
+            ClearToolsRectSelection();
+        }
 
         public static void PlaceTile(int xID, int selectX, int selectY, bool collidable = false)
         {

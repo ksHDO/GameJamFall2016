@@ -43,8 +43,19 @@ namespace MapEditor
         private static bool _isToolbarScrolling = false;
 
         private static Button _buttonToolsFillBucket;
+
         private static bool _toolsFillBucketTextureSelected = false;
         private static Vector2 _toolsFillBucketPos = new Vector2(Game1.Width - 32, 100 - 32);
+
+
+        //-------------------------------| Rectangle Fill and UndoManager |----------------------------
+        private static UndoManager _undoManager;
+        
+        private static Button   _buttonToolsFillRectangle;
+
+        private static bool     _toolsFillRectangleTextureSelected = false;
+        private static Vector2  _toolsFillRectanglePos = new Vector2(Game1.Width - 64, 100 - 32);
+        //---------------------------------------------------------------------------------------------
 
 
         private static int _tileSelectionID = 0;
@@ -66,7 +77,14 @@ namespace MapEditor
             _buttonToolsFillBucket = new Button(content, "Tools/fillBucket");
             _buttonToolsFillBucket.SetEvent(ToggleFillBucket);
             _buttonToolsFillBucket.Position = _toolsFillBucketPos;
-            
+
+
+            //-----| Fill stuff |------------------
+            _buttonToolsFillRectangle = new Button(content, "Tools/fillRectangle");
+            _buttonToolsFillRectangle.SetEvent(ToggleFillRectangle);
+            _buttonToolsFillRectangle.Position = _toolsFillRectanglePos;
+            //-------------------------------------
+
             CreateNewMap();
             DefaultValues();
         }
@@ -119,11 +137,17 @@ namespace MapEditor
             _selectionRect.Dispose();
             _toolbarScroll.Dispose();
             _buttonToolsFillBucket.Dispose();
+            //-----------------------
+            _buttonToolsFillRectangle.Dispose();
         }
 
         public void Update(GameTime gameTime)
         {
             _buttonToolsFillBucket.Update();
+
+            //-----------------------
+            _buttonToolsFillRectangle.Update();
+
             ParseKeys();
             ParseMouse();
         }
@@ -235,6 +259,12 @@ namespace MapEditor
             }
         }
 
+        //---------------------------------------------
+        //private void Undo()
+        //{
+        //    //_undoManager.Undo();
+        //}
+
         private void ParseKeys()
         {
             KeyboardState state = Keyboard.GetState();
@@ -265,6 +295,12 @@ namespace MapEditor
                 {
                     NewMap();
                 }
+
+                //---------| UNDO |
+                //if (state.IsKeyDown(Keys.Z))
+                //{
+                //}
+
             }
             else
             {
@@ -333,6 +369,14 @@ namespace MapEditor
             _toolsFillBucketTextureSelected = !_toolsFillBucketTextureSelected;
         }
 
+        //-------------------------------------------------------------------------
+        private void ToggleFillRectangle()
+        {
+            _toolsFillRectangleTextureSelected = !_toolsFillRectangleTextureSelected;
+        }
+        //-------------------------------------------------------------------------
+
+
         public void ParseMouse()
         {
             _mousePos = MouseInput.LastPos;
@@ -357,6 +401,27 @@ namespace MapEditor
                         }
                     }
                 }
+
+                if (_mousePos.Y > 100 && _mousePos.Y < Game1.Height)
+                {
+                    if (_toolsFillRectangleTextureSelected) //------------------------- 
+                    {
+                        
+                        if (EditorDraw.FirstRectFillTileSelected)
+                        {
+                            EditorDraw.ExecuteRectangleFill(CurrentTileSelectionID, _selectionX, _selectionY);
+                            EditorDraw.ClearToolsRectSelection();
+                        }
+                        else
+                        {
+                            EditorDraw.SelectTile(_selectionX, _selectionY);
+                        }
+
+                    }
+
+                }
+
+
             }
             else if (MouseInput.CheckLeftDown())
             {
@@ -389,12 +454,14 @@ namespace MapEditor
                     {
                         EditorDraw.FillTile(CurrentTileSelectionID, _selectionX, _selectionY, ShowCollision);
                     }
-                    else
+                    else if (!_toolsFillRectangleTextureSelected)
                     {
                         EditorDraw.PlaceTile(CurrentTileSelectionID, _selectionX, _selectionY, ShowCollision);
                     }
 
                 }
+
+
             }
             else if (MouseInput.CheckRightDown())
             {
@@ -527,8 +594,12 @@ namespace MapEditor
 
             // spriteBatch.Draw(_toolsFillBucketTexture, _toolsFillBucketPos, Color.White);
             _buttonToolsFillBucket.Draw(spriteBatch);
+            _buttonToolsFillRectangle.Draw(spriteBatch);
             if (_toolsFillBucketTextureSelected)
                 spriteBatch.Draw(_selectionRect, _toolsFillBucketPos, Color.White);
+            if (_toolsFillRectangleTextureSelected)
+                spriteBatch.Draw(_selectionRect, _toolsFillRectanglePos, Color.White);
+
         }
 
     }

@@ -36,10 +36,11 @@ namespace MapEditor
             IsMouseVisible = true;
 
             Height = 800;
-            Width = 800;
+            Width = 1024;
             graphics.PreferredBackBufferHeight = Height;
             graphics.PreferredBackBufferWidth = Width;
             Window.Position = new Point(Window.Position.X, 100);
+
             graphics.ApplyChanges();
 
             base.Initialize();
