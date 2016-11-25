@@ -60,8 +60,12 @@
     <Compile Include="GameState\SceneMainMenu.cs" />
     <Compile Include="GameState\ScenePlay.cs" />
     <Compile Include="GameState\Scene.cs" />
+    <Compile Include="GameState\SceneTestMap.cs" />
     <Compile Include="GameState\State.cs" />
     <Compile Include="KeyboardInput.cs" />
+    <Compile Include="Maps\Map.cs" />
+    <Compile Include="Maps\TextureMap.cs" />
+    <Compile Include="Maps\Tile.cs" />
     <Compile Include="MouseInput.cs" />
     <Compile Include="MouseManager.cs" />
     <Compile Include="RectangleF.cs" />
@@ -91,6 +95,9 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\maps\start.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
