@@ -16,6 +16,7 @@ namespace TentativeTitle.Components
         public float TerminalVelocity { get; set; } = -50.0f;
         // public float Angle { get; set; } = -30;
         public float Time { get; set; } = 0.0f;
+        public float TimeSpeed { get; set; } = 5.0f;
         public Vector2 StartPos { get; set; } = new Vector2(100, 100);
         public float Mass { get; set; }
 
@@ -26,26 +27,30 @@ namespace TentativeTitle.Components
 
         public override void Update(GameTime time)
         {
+            float dt = (float) time.ElapsedGameTime.TotalSeconds;
             ComponentTransform transform = GetSiblingComponent<ComponentTransform>();
             float x = 0;
             float y = 0;
+            Vector2 vel;
+            float velY = 0;
+            float velX = 0;
             if (transform != null)
             {
                 ComponentGravity gravity = GetSiblingComponent<ComponentGravity>();
                 if (gravity != null)
                 {
-                    Vector2 position = transform.Pos;
-                    y = (float) (StartPos.Y + Velocity.Y * Math.Sin(MathHelper.ToRadians(Velocity.X)) * Time - gravity.Gravity * Time * Time / 2.0);
-                    x = (float)(StartPos.X + Velocity.Y * Math.Cos(MathHelper.ToRadians(Velocity.X)) * Time);
+                    velY = (float) ((Velocity.Y * Math.Sin(MathHelper.ToRadians(Velocity.X)) * Time - gravity.Gravity * Time * Time / 2.0));
+                    velX = (float) ((Velocity.Y * Math.Cos(MathHelper.ToRadians(Velocity.X)) * Time));
                 }
                 
             }
+            x = StartPos.X + velX;
+            y = StartPos.Y + velY;
 
-            // Velocity += (float) (Acceleration * time.ElapsedGameTime.TotalSeconds);
-            // if (Velocity < TerminalVelocity)
-            //     Velocity = TerminalVelocity;
-            Time += 2 * (float) time.ElapsedGameTime.TotalSeconds;
+            Time += TimeSpeed * dt;
             transform.Pos = new Vector2(x, y);
+
+            
 
             base.Update(time);
         }
