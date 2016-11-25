@@ -16,6 +16,10 @@ namespace TentativeTitle.Components
 
        public Vector2 Translate
         {
+            set
+            {
+                _translate = value;
+            }
             get
             {
                 return _translate;
@@ -24,6 +28,10 @@ namespace TentativeTitle.Components
 
         public float Rotate
         {
+            set
+            {
+                _rotate = value;
+            }
             get
             {
                 return _rotate;
@@ -32,23 +40,28 @@ namespace TentativeTitle.Components
 
         public float Scale
         {
+            set
+            {
+                _scale = value;
+            }
             get
             {
                 return _scale;
             }
         }
 
-        public Transform(Vector2 translate = new Vector2(), float rotate = 0.0f, float scale = 0.0f)
+        public Transform(Vector2 translate = new Vector2(), float rotate = 0.0f, float scale = 1.0f)
         {
             _translate = translate;
             _rotate = rotate;
             _scale = scale;
         }
 
-        public static Transform operator +(Transform t1, Transform t2)
-        {
-            return new Transform(t1._translate + t2._translate, t1._rotate + t2._rotate);
-        }
+        //public static Transform operator +(Transform t1, Transform t2)
+        //{
+            
+        //    return new Transform(t1._translate + t2._translate , t1._rotate + t2._rotate, t1.Scale);
+        //}
 
     }
 
@@ -57,6 +70,30 @@ namespace TentativeTitle.Components
 
         Transform           _transform;
         ComponentTransform  _parent;
+
+        public int X
+        {
+            get
+            {
+                return (int)_transform.Translate.X;
+            }
+        }
+
+        public int Y
+        {
+            get
+            {
+                return (int)_transform.Translate.Y;
+            }
+        }
+
+        public float Scale
+        {
+            get
+            {
+                return _transform.Scale;
+            }
+        }
 
         public Transform LocalTransform
         {
@@ -76,22 +113,52 @@ namespace TentativeTitle.Components
                 }
                 else
                 {
-                    return _transform + _parent.WorldTransform;
+                    // _transform + _parent.WorldTransform;
+
+
+                    return (this + _parent);
                 }
             }
         }
 
+        public void SetPos(Vector2 pos)
+        {
+            _transform.Translate = pos;
+        }
+
+        public Vector2 GetPos()
+        {
+            return _transform.Translate;
+        }
+
         public ComponentTransform() : base("transform")
         {
-            _transform = new Transform();
+            _transform = new Transform(new Vector2(),0.0f,1.0f);
         }
 
         void SetParent(ComponentTransform parent = null)
         {
             _parent = parent;
         }
+        //public static ComponentTransform operator +(ComponentTransform t1, ComponentTransform t2)
+        //{
+        //Matrix.CreateRotationZ(MathHelper.ToRadians(t2..Rotate))
 
 
+        //    return new Transform(t1._translate + t2._translate , t1._rotate + t2._rotate, t1.Scale);
+        //}
+
+        public static Transform operator +(ComponentTransform child, ComponentTransform parent)
+        {
+            Matrix rotation = Matrix.CreateRotationZ(MathHelper.ToRadians(parent.WorldTransform.Rotate));
+            Vector3 threeTrans = new Vector3(child.LocalTransform.Translate, 1.0f);
+            Transform parentTrans = parent.WorldTransform;
+            //threeTrans
+            float parScale = parentTrans.Scale;
+            Vector2 translate = parentTrans.Translate + (Vector2.Transform(child.LocalTransform.Translate, rotation) * parScale);
+            float rotate = parentTrans.Rotate + child.LocalTransform.Rotate;
+            return new Transform(translate, rotate, parScale * child.Scale);
+        }
 
     }
 }

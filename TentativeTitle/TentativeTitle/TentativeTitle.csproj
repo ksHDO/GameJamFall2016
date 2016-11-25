@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\ComponentCollision.cs" />
+    <Compile Include="Components\ComponentSprite.cs" />
     <Compile Include="Components\ComponentTransform.cs" />
     <Compile Include="Components\Entity.cs" />
     <Compile Include="Components\EntityManager.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="Elements\Shape.cs" />
     <Compile Include="Elements\Sprite2D.cs" />
     <Compile Include="Elements\Text.cs" />
+    <Compile Include="Entities\EntitySprite.cs" />
     <Compile Include="FileReadWriter.cs" />
     <Compile Include="GameState\SceneMainMenu.cs" />
     <Compile Include="GameState\ScenePlay.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VectorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

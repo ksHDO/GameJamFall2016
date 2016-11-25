@@ -12,6 +12,7 @@ namespace TentativeTitle
     {
         public static Vector2 LastPos { get; private set; }
         public static Vector2 DPos { get; private set; }
+        public static Vector2 CurrentPos { get; private set; }
         public static int ScrollValue { get; private set; }
         private static bool leftWasDown;
         private static bool leftIsDown;
@@ -58,6 +59,7 @@ namespace TentativeTitle
             Vector2 curPos = mouseState.Position.ToVector2();
             DPos = curPos - LastPos;
             LastPos = curPos;
+            CurrentPos = curPos;
         }
         private static void UpdatePress(MouseState mouseState)
         {

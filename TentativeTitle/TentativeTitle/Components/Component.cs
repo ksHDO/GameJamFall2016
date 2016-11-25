@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace TentativeTitle.Components
 {
@@ -23,7 +24,7 @@ namespace TentativeTitle.Components
             Name = name;
             Description = description;
         }
-        public Component GetSiblingComponent<T>()
+        public Component GetSiblingComponent<T>() where T : Component
         {
             return _owner.GetComponent<T>();
         }

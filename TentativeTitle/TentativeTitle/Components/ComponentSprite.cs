@@ -25,6 +25,10 @@ namespace TentativeTitle.Components
 
         public Rectangle Bounds
         {
+            set
+            {
+                _bounds = value;
+            }
             get
             {
                 return _bounds;
@@ -55,12 +59,41 @@ namespace TentativeTitle.Components
 
     }
 
+
+
+    /// <summary>
+    /// Add last
+    /// </summary>
     class ComponentSprite : Component
     {
         Sprite _sprite;
+
+
+        public Rectangle Bounds
+        {
+            get
+            {
+                return _sprite.Bounds;
+            }
+        }
+
+        public Texture2D Texture
+        {
+            get
+            {
+                return _sprite.Texture;
+            }
+        }
+
         public ComponentSprite(Texture2D tex = null) : base("sprite")
         {
             _sprite = new Sprite(tex);
+        }
+
+
+        public Texture2D SetTexture(Texture2D tex)
+        {
+            return _sprite.SetTexture(tex);
         }
 
         public Sprite GetSprite()
@@ -68,16 +101,31 @@ namespace TentativeTitle.Components
             return _sprite;
         }
 
-        public Rectangle GetBounds()
+
+        //public Texture2D GetTexture()
+        //{
+        //    return _sprite.Texture;
+        //}
+
+        public override void Update(GameTime time)
         {
-            return _sprite.Bounds;
-        }
+            //ComponentTransform transform = (ComponentTransform)GetSiblingComponent<ComponentTransform>();
+            //Point trans = transform.WorldTransform.Translate.ToPoint();
+            //trans.X -= (_sprite.Bounds.Width / 2);
+            //trans.Y -= (_sprite.Bounds.Height / 2);
+
+            //Rectangle rect = new Rectangle(trans.X, trans.Y, Bounds.Width, Bounds.Height);
 
 
-        public Texture2D GetTexture()
-        {
-            return _sprite.Texture;
+            //rect.Width  = (int)((float)rect.Width * transform.Scale);
+            //rect.Height = (int)((float)trans.Y * transform.Scale);
+          
+
+            
+
+           // _sprite.Bounds = 
         }
+
 
     }
 

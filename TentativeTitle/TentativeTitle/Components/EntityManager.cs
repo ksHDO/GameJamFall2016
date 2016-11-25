@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
+using TentativeTitle.Entities;
 
 namespace TentativeTitle.Components
 {
     class EntityManager
     {
 
-        private const int MAX_ENTITIES = 1024;
-        private Entity[] _entities;
+        private const int MAX_ENTITIES = 512;
+        private Entity[] _entities = new Entity[MAX_ENTITIES];
         private int _entityIndex = 0;
+
 
         public bool AddEntity(Entity entity)
         {
@@ -47,6 +52,20 @@ namespace TentativeTitle.Components
             }
         }
 
+
+        public bool LoadContent(ContentManager content)
+        {
+            //if(!AddEntity(new EntitySprite("testSprite", content.Load<Texture2D>("sprites/player/Character"))))
+            //{
+            //    Console.WriteLine("EntityManager: loading test failed");
+            //    return false;
+            //}
+            //
+            //((ComponentTransform)((EntitySprite)GetEntity("testSprite")).GetComponent<ComponentTransform>()).SetPos(new Vector2(20.0f, 20.0f));
+
+            return true;
+        }
+
         public Entity GetEntity(string name)
         {
             for (int i = 0; i < _entityIndex; i++)
@@ -60,19 +79,58 @@ namespace TentativeTitle.Components
             return null;
         }
 
-
-
+        //public Entity GetComponentAs<T>(string name)
+        //{
+        //    for (int i = 0; i < _entityIndex; i++)
+        //    {
+        //        if (_entities[i] is T)
+        //        {
+        //            return _entities[i];
+        //        }
+        //    }
+        //    Console.Write("Entity::GetComponent - Could not find entity (" + typeof(T).ToString() + ")\n");
+        //    return null;
+        //}
 
         public void Update(GameTime time)
         {
             for (int i = 0; i < _entityIndex; i++)
             {
-                if (_entities[i].IsEnabled)
+                if (_entities[i] != null)
                 {
-                    _entities[i].Update(time);
+                    if (_entities[i].IsEnabled)
+                    {
+                        _entities[i].Update(time);
+                    }
                 }
             }
         }
+       
+        public bool Initialize()
+        {
+            for (int i = 0; i < _entityIndex; i++)
+            {
+                if (_entities[i] != null)
+                {
+                    _entities[i].Initialize();
+                }
+            }
+
+            return true;
+        }
+
+
+        public void Draw(SpriteBatch batch)
+        {
+            for (int i = 0; i < _entityIndex; i++)
+            {
+                if (_entities[i].IsEnabled)
+                {
+                    _entities[i].Draw(batch);
+                }
+            }
+        }
+
 
 
     }

@@ -86,7 +86,6 @@ namespace TentativeTitle.Components
             return other.Collider.Right - Collider.Left;
         }
 
-
         //----------------- This is a meme: lol
 
         private float Fabs(float f)

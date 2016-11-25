@@ -4,10 +4,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TentativeTitle.Components
 {
-    class GameTime { }
+    
     class Entity
     {
         private static int _currentID = 0;
@@ -20,12 +22,17 @@ namespace TentativeTitle.Components
         public string Name { get;}
         public bool IsEnabled { get; set; }
 
-        public Entity(string name, bool enabled)
+        public Entity(string name, bool enabled = true)
         {
             ID = _currentID++;
             _components = new Component[MAX_COMPONENTS];
             Name = name;
             IsEnabled = enabled;
+        }
+
+        public virtual bool Initialize()
+        {
+            return true;
         }
 
         public bool AddComponent(Component component)
@@ -67,13 +74,13 @@ namespace TentativeTitle.Components
             }
         }
 
-        public Component GetComponent<T>()
+        public T GetComponent<T>() where T : Component
         {
             for (int i = 0; i < _componentIndex; i++)
             {
                 if (_components[i] is T)
                 {
-                    return _components[i];
+                    return (T)_components[i];
                 }
             }
             Console.Write("Entity::GetComponent - Could not find component (" + typeof(T).ToString() + ")\n");
@@ -103,6 +110,12 @@ namespace TentativeTitle.Components
                 }
             }
         }
+
+        public virtual void Draw(SpriteBatch batch)
+        {
+            //Implement Code
+        }
+
 
         public override string ToString()
         {
