@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using TentativeTitle.Maps;
 using TentativeTitle.Components;
 using TentativeTitle.Entities;
+using Microsoft.Xna.Framework.Media;
 
 namespace TentativeTitle.GameState
 {
@@ -18,6 +19,7 @@ namespace TentativeTitle.GameState
         private Texture2D _tileset;
         private Map _map;
         private Vector2 _position = new Vector2(0, 1200);
+        private Song _song;
 
         private Vector2 _backgroundPosition = new Vector2(0, 0);
         private Texture2D _textureBackground;
@@ -63,6 +65,9 @@ namespace TentativeTitle.GameState
             _map = FileReadWriter.ReadFromBinary<Map>(MapDirectory);
             _tileset = content.Load<Texture2D>(_map.TextureMap.TileTexture);
             _textureBackground = content.Load<Texture2D>("sprites/backgrounds/background1");
+            _song = content.Load<Song>("music/AVoid");
+            MediaPlayer.Play(_song);
+            MediaPlayer.IsRepeating = true;
 
             KeyboardInput.AddKey(Microsoft.Xna.Framework.Input.Keys.Space);
 
@@ -99,7 +104,7 @@ namespace TentativeTitle.GameState
             //_oldPlayerPos = _entityManager.GetEntity("player").GetComponent<ComponentTransform>().WorldTransform.Translate;
 
             _entityManager.AddEntity(new EntityProjectile("player",
-               content.Load<Texture2D>(@"sprites/player/Character"),
+               content.Load<Texture2D>(@"sprites/player/char1"),
                new Vector2(400.0f,240.0f),
                new Vector2(32.0f, 64.0f), true));
 
@@ -110,6 +115,8 @@ namespace TentativeTitle.GameState
         {
             _tileset.Dispose();
             _textureBackground.Dispose();
+            MediaPlayer.Stop();
+            _song.Dispose();
         }
 
         public void Update(GameTime gameTime)
@@ -180,16 +187,31 @@ namespace TentativeTitle.GameState
 
             if (MouseInput.CheckLeftPressed())
             {
-                _entityManager.GetEntity("warpBall").GetComponent<ComponentTransform>().Pos = playerTransform.Pos + new Vector2(0,-50.0f);
+                _entityManager.GetEntity("warpBall").GetComponent<ComponentTransform>().Pos = playerTransform.Pos + new Vector2(0,-36.0f);
                 ComponentPhysics ballPhys = _entityManager.GetEntity("warpBall").GetComponent<ComponentPhysics>();
                 ballPhys.Velocity =
                     new Vector2(MouseInput.CurrentPos.X - playerTransform.Pos.X, MouseInput.CurrentPos.Y - playerTransform.Pos.Y)
-                    .Normalized().MultiplyLength(1000.0f);
+                    .Normalized().MultiplyLength(500.0f);
             }
 
-            if (KeyboardInput.CheckIsKeyDown(Microsoft.Xna.Framework.Input.Keys.E))
+            if (KeyboardInput.CheckIsPressed(Microsoft.Xna.Framework.Input.Keys.E))
             {
-                playerPhysics.Velocity = new Vector2();
+
+                Entity warpBall = _entityManager.GetEntity("warpBall");
+                if (!warpBall.GetComponent<ComponentPhysics>().InAir)
+                {
+                    Entity player = _entityManager.GetEntity("player");
+                    Vector2 playerPos = player.GetComponent<ComponentTransform>().Pos;
+                    playerPos = warpBall.GetComponent<ComponentTransform>().Pos;
+                    playerPos.Y -= 32;
+                    playerPos.X += 16;
+                    Vector2 vel = player.GetComponent<ComponentPhysics>().Velocity;
+                    vel.Y = 0;
+                    player.GetComponent<ComponentPhysics>().Velocity = vel;
+                    player.GetComponent<ComponentTransform>().Pos = playerPos;
+                }
+
+                
             }
 
 
