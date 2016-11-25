@@ -15,13 +15,13 @@ namespace TentativeTitle.Components
         public float AccelerationX { get; set; } = 0.0f;
         public float AccelerationY { get; set; } = 0.0f;
 
-        public float DragX { get; set; } = 0.99999f;
+        public float DragX { get; set; } = 0.9f;
         public float DragY { get; set; } = 0.999999f;
 
 
         // public float Velocity { get; set; } = 40.0f;
         
-        public float TerminalVelocity { get; set; } = 40.0f;
+        public float TerminalVelocity { get; set; } = 750.0f;
 
         public Vector2 Velocity { get; set; } = new Vector2(0.0f, 0.0f);
 
@@ -100,8 +100,8 @@ namespace TentativeTitle.Components
             
             
             //Time += TimeSpeed * dt;
-            Vector2 oldPos = transform.Pos;
-            transform.Pos = new Vector2(oldPos.X + (Velocity.X * dt), oldPos.Y + (Velocity.Y * dt));
+            //Vector2 oldPos = transform.Pos;
+            //transform.Pos = new Vector2(oldPos.X + (Velocity.X * dt), oldPos.Y + (Velocity.Y * dt));
 
 
             //base.Update(time);

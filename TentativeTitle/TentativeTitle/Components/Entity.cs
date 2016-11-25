@@ -28,6 +28,7 @@ namespace TentativeTitle.Components
             _components = new Component[MAX_COMPONENTS];
             Name = name;
             IsEnabled = enabled;
+           AddComponent(new ComponentTransform());
         }
 
         public virtual bool Initialize()
@@ -111,6 +112,8 @@ namespace TentativeTitle.Components
                 }
             }
         }
+
+
 
         public virtual void Draw(SpriteBatch batch)
         {

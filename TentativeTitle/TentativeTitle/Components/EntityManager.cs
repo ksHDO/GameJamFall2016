@@ -52,6 +52,13 @@ namespace TentativeTitle.Components
             }
         }
 
+        public void MoveAllBy(Vector2 delta)
+        {
+            for (int i = 0; i < _entityIndex; i++)
+            {
+                _entities[i].GetComponent<ComponentTransform>().Pos = _entities[i].GetComponent<ComponentTransform>().Pos + delta;
+            }
+        }
 
         public bool LoadContent(ContentManager content)
         {

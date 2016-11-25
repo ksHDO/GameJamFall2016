@@ -94,6 +94,10 @@ namespace TentativeTitle.Components
             {
                 return _transform.Scale;
             }
+            set
+            {
+                _transform.Scale = value;
+            }
         }
 
         public Transform LocalTransform

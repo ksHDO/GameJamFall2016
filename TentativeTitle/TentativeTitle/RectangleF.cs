@@ -66,6 +66,73 @@ namespace TentativeTitle
             }
         }
 
+        public Vector2 TopLeft
+        {
+            get
+            {
+                return new Vector2(Left, Top);
+            }
+        }
+
+        public Vector2 TopRight
+        {
+            get
+            {
+                return new Vector2(Right, Top);
+            }
+        }
+
+        public Vector2 BottomLeft
+        {
+            get
+            {
+                return new Vector2(Left, Bottom);
+            }
+        }
+
+        public Vector2 BottomRight
+        {
+            get
+            {
+                return new Vector2(Right, Bottom);
+            }
+        }
+
+        public Vector2 BottomMid
+        {
+            get
+            {
+                return new Vector2(X + Width/2.0f, Bottom);
+            }
+        }
+
+        public Vector2 TopMid
+        {
+            get
+            {
+                return new Vector2(X + Width / 2.0f, Top);
+            }
+        }
+
+
+        public Vector2 RightMid
+        {
+            get
+            {
+                return new Vector2(Right, Top + Height/2.0f);
+            }
+        }
+
+
+        public Vector2 LeftMid
+        {
+            get
+            {
+                return new Vector2(Left, Top + Height / 2.0f);
+            }
+        }
+
+
         public RectangleF(float x, float y, float width, float height)
         {
             X = x;
@@ -101,6 +168,14 @@ namespace TentativeTitle
 
         public RectF_IntersectSide IntersectSide(RectangleF other)
         {
+
+            //bool l = other.Contains(Left, Bottom);
+            //bool r = other.Contains(Right, Bottom);
+            //bool t = other.Contains(Left, Top);
+            //bool b = other.Contains(Right, Top);
+
+
+
             bool b_l_Contact = other.Contains(Left, Bottom);
             bool b_r_Contact = other.Contains(Right, Bottom);
             bool t_l_Contact = other.Contains(Left,  Top);
@@ -108,28 +183,32 @@ namespace TentativeTitle
 
 
             if (b_l_Contact && b_r_Contact && t_l_Contact && t_r_Contact) return RectF_IntersectSide.Inside;
-            
+
+
+            //if (b_r_Contact && b_l_Contact) return Bottom;
+
 
             if (b_r_Contact)
             {
+                if (t_r_Contact || other.Contains(new Vector2(Right + .01f, Bottom - (Height / 4.0f)))) return RectF_IntersectSide.Right;
                 if (b_l_Contact) return RectF_IntersectSide.Bottom;
-                if (t_r_Contact) return RectF_IntersectSide.Right;
-                else return RectF_IntersectSide.Bottom;
+                return RectF_IntersectSide.Bottom;
+            }
+            else if (b_l_Contact)
+            {
+                if (t_l_Contact || other.Contains(new Vector2(Left, Bottom - (Height / 2.0f)))) return RectF_IntersectSide.Left;
             }
             else if (t_l_Contact)
             {
                 if (t_r_Contact) return RectF_IntersectSide.Top;
-                if (b_l_Contact) return RectF_IntersectSide.Left;
-                else return RectF_IntersectSide.Bottom;
+                //if (b_l_Contact) return RectF_IntersectSide.Left;
+                else return RectF_IntersectSide.Top;
             }
             else if (t_r_Contact)
             {
                 return RectF_IntersectSide.Top;
             }
-            else if (b_l_Contact)
-            {
-                return RectF_IntersectSide.Bottom;
-            }
+            
 
             return RectF_IntersectSide.NoIntersection;
         }
