@@ -60,6 +60,9 @@ namespace TentativeTitle.GameState
                     Game1.State = State.TEST_MAP;
                 }
             }
+
+            if (KeyboardInput.CheckIsPressed(Microsoft.Xna.Framework.Input.Keys.Escape))
+                Game1.State = State.QUIT;
         }
     }
 }

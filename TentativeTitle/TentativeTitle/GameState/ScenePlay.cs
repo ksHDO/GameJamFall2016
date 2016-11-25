@@ -70,6 +70,11 @@ namespace TentativeTitle.GameState
             }
 
             _entityManager.Update(gameTime);
+
+            if (KeyboardInput.CheckIsPressed(Keys.Escape))
+            {
+                Game1.State = State.MAIN_MENU;
+            }
             
         }
     }
