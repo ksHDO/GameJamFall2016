@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Map2 = TentativeTitle.Maps;
+
 
 namespace MapEditor
 {
@@ -22,7 +24,7 @@ namespace MapEditor
 
     class EditorDraw
     {
-        public static Map CurrentMap { get; set; }
+        public static Map2.Map CurrentMap { get; set; }
 
 
         //-------------------- Stored tile

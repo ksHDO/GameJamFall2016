@@ -9,7 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TentativeTitle;
+using TentativeTitle.Maps;
 using Forms = System.Windows.Forms;
+using Map2 = TentativeTitle.Maps;
 
 namespace MapEditor
 {
@@ -17,7 +19,7 @@ namespace MapEditor
     {
         private const string FILE_TYPE_FILTER = ".map files (*.map)|*.map";
 
-        public static Map CurrentMap { get; private set; }
+        public static Map2.Map CurrentMap { get; private set; }
 
         private static ContentManager _contentLoader;
         private static Texture2D _selectionRect;
@@ -92,7 +94,7 @@ namespace MapEditor
 
         private void CreateNewMap()
         {
-            CurrentMap = new Map(_contentLoader, "tileset1", 30, 30, 32);
+            CurrentMap = new Map2.Map(_contentLoader, "tileset1", 30, 30, 32);
 
         }
 
@@ -157,7 +159,7 @@ namespace MapEditor
 
         private void SwitchTextures()
         {
-            TextureMap previousTexture = new TextureMap(CurrentMap.TextureMap);
+            Map2.TextureMap previousTexture = new Map2.TextureMap(CurrentMap.TextureMap);
             string input = Microsoft.VisualBasic.Interaction.InputBox("Enter Texture.", "Change TileMap");
             if (input != null && input != "")
             {
@@ -229,7 +231,8 @@ namespace MapEditor
                     try
                     {
                         string file = fd.FileName;
-                        CurrentMap = FileReadWriter.ReadFromBinary<Map>(file);
+                        // Map loadedMap = FileReadWriter.ReadFromBinary<Map>(file);
+                        CurrentMap = FileReadWriter.ReadFromBinary<TentativeTitle.Maps.Map>(file);
                         DefaultValues();
                     }
                     catch (Exception ex)

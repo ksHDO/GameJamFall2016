@@ -7,12 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tentative = TentativeTitle.Maps;
 
-namespace MapEditor
+namespace TentativeTitle.Maps
 {
-   [Serializable]
-   class Map
+    [Serializable]
+    public class Map
     {
         private const int MAX_WIDTH = 500;
         private const int MAX_HEIGHT = 500;
@@ -25,23 +24,10 @@ namespace MapEditor
         // public Trigger[] Triggers { get; set; }
         // private Vector2 _mapPosition;
 
-        public Tentative.Map Clone()
+
+        public Map()
         {
-            Tentative.Map output = new Tentative.Map();
-            TextureMap thisMap = TextureMap;
-            output.TextureMap = new TentativeTitle.Maps.TextureMap(thisMap.TileTexture, thisMap.TextureWidth, thisMap.TextureHeight, thisMap.TileWidth, thisMap.TileHeight);
-            output.ChangeDimensions(Width, Height);
-            for (int x = 0; x < Width; x++)
-            {
-                for (int y = 0; y < Height; y++)
-                {
-                    Tentative.Tile outTile = new Tentative.Tile();
-                    outTile.ID = Tiles[x, y].ID;
-                    outTile.Collidable = Tiles[x, y].Collidable;
-                    output.Tiles[x, y] = outTile;
-                }
-            }
-            return output;
+
         }
 
         private Map(ContentManager content, int width, int height, int spriteWidthHeight)
@@ -49,8 +35,8 @@ namespace MapEditor
             Width = width;
             Height = height;
         }
-        
-        public Map(ContentManager content, string tileSet, int width, int height, int spriteWidthHeight) : this(content,width, height, spriteWidthHeight)
+
+        public Map(ContentManager content, string tileSet, int width, int height, int spriteWidthHeight) : this(content, width, height, spriteWidthHeight)
         {
             TextureMap = new TextureMap(tileSet, spriteWidthHeight);
             Load(content);

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using TentativeTitle.Maps;
 
 namespace TentativeTitle
 {
@@ -72,8 +73,16 @@ namespace TentativeTitle
         {
             using (Stream stream = File.Open(fullPath, FileMode.Open))
             {
-                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                return (T)binaryFormatter.Deserialize(stream);
+                if (stream != null)
+                {
+                    var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                    return (T)binaryFormatter.Deserialize(stream);
+                }
+                else
+                {
+                    return default(T);
+                }
+
             }
         }
         public static T ReadFromBinary<T>(string path, string filename)
