@@ -64,6 +64,7 @@ namespace TentativeTitle
         private void RegisterKeyboardKeys()
         {
             KeyboardInput.AddKey(Keys.Escape);
+            KeyboardInput.AddKey(Keys.E);
         }
 
         /// <summary>
