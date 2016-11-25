@@ -33,7 +33,7 @@ namespace TentativeTitle.GameState
             _textPlay = new Text(_fontVisitor, "Play", new Vector2(0, 50), Align.CenterMid, Color.White, TextAlignment.CenterMid);
             _textQuit = new Text(_fontVisitor, "Quit Game", new Vector2(0, 100), Align.CenterMid, Color.White, TextAlignment.CenterMid);
 
-            _spriteTest = new Sprite2D(content, @"sprites/objects/warpBall", Vector2.Zero, Color.White);
+            _spriteTest = new Sprite2D(content, @"sprites/objects/warpBall", Vector2.Zero, Color.White, 0, null, 0.5f, SpriteEffects.None, 0);
         }
 
         public void UnloadContent()
